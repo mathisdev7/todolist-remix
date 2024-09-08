@@ -10,8 +10,10 @@
   "compilerOptions": {
     "lib": ["DOM", "DOM.Iterable", "ES2022"],
     "types": ["@remix-run/node", "vite/client"],
-    "isolatedModules": true,
+    "downlevelIteration": true,
     "esModuleInterop": true,
+    "isolatedModules": true,
+    "incremental": true,
     "jsx": "react-jsx",
     "module": "ESNext",
     "moduleResolution": "Bundler",

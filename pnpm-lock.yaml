@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@prisma/client':
+    specifier: ^5.19.1
+    version: 5.19.1(prisma@5.19.1)
   '@remix-run/node':
     specifier: ^2.11.2
     version: 2.11.2(typescript@5.5.4)
@@ -15,13 +18,13 @@ dependencies:
     specifier: ^2.11.2
     version: 2.11.2(typescript@5.5.4)
   isbot:
-    specifier: ^4.1.0
+    specifier: ^4.4.0
     version: 4.4.0
   react:
-    specifier: ^18.2.0
+    specifier: ^18.3.1
     version: 18.3.1
   react-dom:
-    specifier: ^18.2.0
+    specifier: ^18.3.1
     version: 18.3.1(react@18.3.1)
 
 devDependencies:
@@ -64,6 +67,9 @@ devDependencies:
   postcss:
     specifier: ^8.4.38
     version: 8.4.45
+  prisma:
+    specifier: ^5.19.1
+    version: 5.19.1
   tailwindcss:
     specifier: ^3.4.4
     version: 3.4.10
@@ -71,7 +77,7 @@ devDependencies:
     specifier: ^5.1.6
     version: 5.5.4
   vite:
-    specifier: ^5.1.0
+    specifier: ^5.4.3
     version: 5.4.3
   vite-tsconfig-paths:
     specifier: ^4.2.1
@@ -1027,6 +1033,46 @@ packages:
     requiresBuild: true
     dev: true
     optional: true
+
+  /@prisma/client@5.19.1(prisma@5.19.1):
+    resolution: {integrity: sha512-x30GFguInsgt+4z5I4WbkZP2CGpotJMUXy+Gl/aaUjHn2o1DnLYNTA+q9XdYmAQZM8fIIkvUiA2NpgosM3fneg==}
+    engines: {node: '>=16.13'}
+    requiresBuild: true
+    peerDependencies:
+      prisma: '*'
+    peerDependenciesMeta:
+      prisma:
+        optional: true
+    dependencies:
+      prisma: 5.19.1
+    dev: false
+
+  /@prisma/debug@5.19.1:
+    resolution: {integrity: sha512-lAG6A6QnG2AskAukIEucYJZxxcSqKsMK74ZFVfCTOM/7UiyJQi48v6TQ47d6qKG3LbMslqOvnTX25dj/qvclGg==}
+
+  /@prisma/engines-version@5.19.1-2.69d742ee20b815d88e17e54db4a2a7a3b30324e3:
+    resolution: {integrity: sha512-xR6rt+z5LnNqTP5BBc+8+ySgf4WNMimOKXRn6xfNRDSpHvbOEmd7+qAOmzCrddEc4Cp8nFC0txU14dstjH7FXA==}
+
+  /@prisma/engines@5.19.1:
+    resolution: {integrity: sha512-kR/PoxZDrfUmbbXqqb8SlBBgCjvGaJYMCOe189PEYzq9rKqitQ2fvT/VJ8PDSe8tTNxhc2KzsCfCAL+Iwm/7Cg==}
+    requiresBuild: true
+    dependencies:
+      '@prisma/debug': 5.19.1
+      '@prisma/engines-version': 5.19.1-2.69d742ee20b815d88e17e54db4a2a7a3b30324e3
+      '@prisma/fetch-engine': 5.19.1
+      '@prisma/get-platform': 5.19.1
+
+  /@prisma/fetch-engine@5.19.1:
+    resolution: {integrity: sha512-pCq74rtlOVJfn4pLmdJj+eI4P7w2dugOnnTXpRilP/6n5b2aZiA4ulJlE0ddCbTPkfHmOL9BfaRgA8o+1rfdHw==}
+    dependencies:
+      '@prisma/debug': 5.19.1
+      '@prisma/engines-version': 5.19.1-2.69d742ee20b815d88e17e54db4a2a7a3b30324e3
+      '@prisma/get-platform': 5.19.1
+
+  /@prisma/get-platform@5.19.1:
+    resolution: {integrity: sha512-sCeoJ+7yt0UjnR+AXZL7vXlg5eNxaFOwC23h0KvW1YIXUoa7+W2ZcAUhoEQBmJTW4GrFqCuZ8YSP0mkDa4k3Zg==}
+    dependencies:
+      '@prisma/debug': 5.19.1
 
   /@remix-run/dev@2.11.2(@remix-run/react@2.11.2)(@remix-run/serve@2.11.2)(typescript@5.5.4)(vite@5.4.3):
     resolution: {integrity: sha512-9DGb2UOIO4jOdws04Z+KmCeEBqbP36XvJZdcd4w16wDGI0I1ZY1c5ro58tB/7zPwN40s9MD9UzCYm6P+EkdeAg==}
@@ -5148,6 +5194,16 @@ packages:
     dependencies:
       parse-ms: 2.1.0
     dev: true
+
+  /prisma@5.19.1:
+    resolution: {integrity: sha512-c5K9MiDaa+VAAyh1OiYk76PXOme9s3E992D7kvvIOhCrNsBQfy2mP2QAQtX0WNj140IgG++12kwZpYB9iIydNQ==}
+    engines: {node: '>=16.13'}
+    hasBin: true
+    requiresBuild: true
+    dependencies:
+      '@prisma/engines': 5.19.1
+    optionalDependencies:
+      fsevents: 2.3.3
 
   /proc-log@3.0.0:
     resolution: {integrity: sha512-++Vn7NS4Xf9NacaU9Xq3URUuqZETPsf8L4j5/ckhaRYsfPeRyzGw+iDjFhV/Jr3uNmTvvddEJFWh5R1gRgUH8A==}
