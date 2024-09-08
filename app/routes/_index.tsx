@@ -1,4 +1,7 @@
-import type { MetaFunction } from "@remix-run/node";
+import getSession from "@/auth/utils/getSession";
+import { prisma } from "@/lib/prismaClient";
+import { json, type MetaFunction } from "@remix-run/node";
+import { useLoaderData } from "@remix-run/react";
 
 export const meta: MetaFunction = () => {
   return [
@@ -6,43 +9,33 @@ export const meta: MetaFunction = () => {
     { name: "description", content: "Welcome to Remix!" },
   ];
 };
+type LoaderData = {
+  user: {
+    name: string;
+  };
+};
+
+export const loader = async ({ request }: { request: Request }) => {
+  const session = await getSession(request);
+  const userId = session.get("userId");
+  const user = await prisma.user.findFirst({
+    where: {
+      id: userId,
+    },
+    select: {
+      name: true,
+    },
+  });
+  return json({ user });
+};
 
 export default function Index() {
+  const data: LoaderData = useLoaderData();
   return (
     <div className="font-sans p-4">
-      <h1 className="text-3xl">Welcome to Remix</h1>
-      <ul className="list-disc mt-4 pl-6 space-y-2">
-        <li>
-          <a
-            className="text-blue-700 underline visited:text-purple-900"
-            target="_blank"
-            href="https://remix.run/start/quickstart"
-            rel="noreferrer"
-          >
-            5m Quick Start
-          </a>
-        </li>
-        <li>
-          <a
-            className="text-blue-700 underline visited:text-purple-900"
-            target="_blank"
-            href="https://remix.run/start/tutorial"
-            rel="noreferrer"
-          >
-            30m Tutorial
-          </a>
-        </li>
-        <li>
-          <a
-            className="text-blue-700 underline visited:text-purple-900"
-            target="_blank"
-            href="https://remix.run/docs"
-            rel="noreferrer"
-          >
-            Remix Docs
-          </a>
-        </li>
-      </ul>
+      <h1 className="text-3xl font-bold">
+        Welcome to Remix, {data.user.name}!
+      </h1>
     </div>
   );
 }
