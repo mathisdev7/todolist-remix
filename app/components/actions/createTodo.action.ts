@@ -1,22 +1,43 @@
+import { prisma } from "@/lib/prismaClient";
 import { ActionFunction, json } from "@remix-run/node";
 
 export const createTodoAction: ActionFunction = async ({ request }) => {
-  const body = new URLSearchParams(await request.text());
-  const title = body.get("title");
-  const description = body.get("description");
+  const formData = await request.formData();
+  const title = formData.get("title") as string;
+  const description = formData.get("description") as string;
+  const userId = formData.get("userId") as string;
 
   if (!title) {
-    return new Response("Le titre est requis", {
-      status: 400,
-    });
+    return json({ error: "Title is required" }, { status: 400 });
   }
   if (!description) {
-    return new Response("La description est requise", {
-      status: 400,
+    return json({ error: "Description is required" }, { status: 400 });
+  }
+  if (!userId) {
+    return json({ error: "User ID is required" }, { status: 400 });
+  }
+  const todoExists = await prisma.todo.findFirst({
+    where: {
+      title,
+      userId,
+    },
+  });
+  if (todoExists) {
+    return json({
+      error: "Todo already exists",
     });
   }
 
+  await prisma.todo.create({
+    data: {
+      title,
+      userId,
+      completed: false,
+      description,
+    },
+  });
+
   return json({
-    success: `Todo créé avec succès\n\n${title}\n\n${description}`,
+    success: "Todo created successfully",
   });
 };
