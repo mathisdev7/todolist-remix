@@ -1,5 +1,5 @@
 import getSession from "@/auth/utils/getSession";
-import { createsUserAction } from "@/components/actions/createUser.action";
+import { createsUserAction } from "@/components/actions/user/createUser.action";
 import { Button } from "@/components/ui/button";
 import {
   Card,

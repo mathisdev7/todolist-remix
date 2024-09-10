@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/prismaClient";
-import { ActionFunction, json } from "@remix-run/node";
+import { ActionFunction, json, redirect } from "@remix-run/node";
 
 export const createTodoAction: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
@@ -15,6 +15,14 @@ export const createTodoAction: ActionFunction = async ({ request }) => {
   }
   if (!userId) {
     return json({ error: "User ID is required" }, { status: 400 });
+  }
+  const user = await prisma.user.findUnique({
+    where: {
+      id: userId,
+    },
+  });
+  if (!user) {
+    return json({ error: "User not found" }, { status: 404 });
   }
   const todoExists = await prisma.todo.findFirst({
     where: {
@@ -37,7 +45,5 @@ export const createTodoAction: ActionFunction = async ({ request }) => {
     },
   });
 
-  return json({
-    success: "Todo created successfully",
-  });
+  return redirect("/");
 };

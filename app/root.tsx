@@ -13,17 +13,29 @@ import clsx from "clsx";
 
 import { themeSessionResolver } from "@/components/ui/session.server";
 import { cssBundleHref } from "@remix-run/css-bundle";
-import { Moon, Sun } from "lucide-react";
+import { Home, LogIn, LogOut, Moon, PlusCircle, Sun } from "lucide-react";
 import {
   PreventFlashOnWrongTheme,
   Theme,
   ThemeProvider,
   useTheme,
 } from "remix-themes";
+import getSession from "./auth/utils/getSession";
 import { Button } from "./components/ui/button";
+import { FloatingDock } from "./components/ui/floating-dock";
+
+type LoaderData = {
+  theme: Theme;
+  userId: string | null;
+};
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: "app/tailwind.css" },
+  {
+    rel: "icon",
+    href: "/favicon.ico",
+    type: "image/x-icon",
+  },
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
 ];
 
@@ -33,15 +45,51 @@ export const loader: LoaderFunction = async ({
   request: ClientLoaderFunctionArgs["request"];
 }) => {
   const { getTheme } = await themeSessionResolver(request);
+  const session = await getSession(request);
+  const userId = session.get("userId");
+  if (!userId) {
+    return {
+      theme: getTheme(),
+      userId: null,
+    };
+  }
 
   return {
     theme: getTheme(),
+    userId,
   };
 };
 
 function App() {
-  const data = useLoaderData();
+  const data: LoaderData = useLoaderData();
   const [theme, setTheme] = useTheme();
+  const links = [
+    {
+      title: "Home",
+      icon: (
+        <Home className="h-full w-full text-neutral-500 dark:text-neutral-300" />
+      ),
+      href: "/",
+    },
+    {
+      title: data.userId ? "Logout" : "Login",
+      icon: data.userId ? (
+        <LogOut className="h-full w-full text-neutral-500 dark:text-neutral-300" />
+      ) : (
+        <LogIn className="h-full w-full text-neutral-500 dark:text-neutral-300" />
+      ),
+      href: data.userId ? "/logout" : "/login",
+    },
+  ];
+  if (data.userId) {
+    links.unshift({
+      title: "New Todo",
+      icon: (
+        <PlusCircle className="h-full w-full text-neutral-500 dark:text-neutral-300" />
+      ),
+      href: "/new-todo",
+    });
+  }
   return (
     <html lang="en" data-theme={theme} className={clsx(theme)}>
       <head>
@@ -63,6 +111,13 @@ function App() {
         <Links />
       </head>
       <body className="dark:bg-primary dark:text-white w-full h-full">
+        <div className="fixed flex flex-row w-full justify-center items-end bottom-8 z-50">
+          <FloatingDock
+            items={links}
+            desktopClassName="z-50 shadow-xl"
+            mobileClassName="z-50 shadow-xl"
+          />
+        </div>
         <Button
           variant="outline"
           size="icon"

@@ -1,13 +1,21 @@
 import getSession from "@/auth/utils/getSession";
 import { Button } from "@/components/ui/button";
+import Todos from "@/components/ui/todos";
 import { prisma } from "@/lib/prismaClient";
 import { json, type MetaFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "New Remix App" },
-    { name: "description", content: "Welcome to Remix!" },
+    { title: "Todo app" },
+    {
+      property: "og:title",
+      content: "Very cool app",
+    },
+    {
+      name: "description",
+      content: "This app is the best",
+    },
   ];
 };
 type LoaderData = {
@@ -42,6 +50,9 @@ export const loader = async ({ request }: { request: Request }) => {
   const todos = await prisma.todo.findMany({
     where: {
       userId: userId,
+    },
+    orderBy: {
+      completed: "asc",
     },
   });
   return json({ user, todos });
@@ -91,43 +102,10 @@ export default function Index() {
       )}
       {todos.length > 0 ? (
         <ul className="flex flex-col gap-4 justify-center items-center w-full">
-          <Button
-            className="w-auto max-w-sm bg-[#9435f3] hover:bg-[#9435f3]"
-            onClick={() => {
-              window.location.href = "/new-todo";
-            }}
-            variant="default"
-            size="lg"
-          >
-            Create a new todo
-          </Button>
-          {todos.map((todo) => (
-            <li
-              key={todo.id}
-              className="flex flex-col gap-2 w-auto justify-center items-center p-2 rounded-md shadow-md bg-[#581d93] text-white"
-            >
-              <span className="text-xl font-semibold">{todo.title}</span>
-              <section className="flex flex-col gap-1">
-                <span className="text-lg">{todo.description}</span>
-                <p className="text-md text-center">
-                  {todo.completed ? "Completed" : "Not completed"}
-                </p>
-              </section>
-            </li>
-          ))}
+          <Todos todos={todos} />
         </ul>
       ) : user?.name ? (
         <ul className="grid gap-4">
-          <Button
-            className="w-full max-w-sm bg-[#9435f3] hover:bg-[#9435f3]"
-            onClick={() => {
-              window.location.href = "/new-todo";
-            }}
-            variant="default"
-            size="lg"
-          >
-            Create a new todo
-          </Button>
           <p className="text-center font-sans">There are no todos yet.</p>
         </ul>
       ) : null}

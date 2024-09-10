@@ -1,5 +1,5 @@
 import getSession from "@/auth/utils/getSession";
-import { createTodoAction } from "@/components/actions/createTodo.action";
+import { createTodoAction } from "@/components/actions/todo/createTodo.action";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Icons } from "@/lib/icons";
