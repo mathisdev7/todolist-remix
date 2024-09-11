@@ -1,0 +1,5 @@
+{
+  "version": 2,
+  "builds": [{ "src": "remix.config.cjs", "use": "@remix-run/vercel" }],
+  "routes": [{ "src": "/(.*)", "dest": "/build/index.js" }]
+}
