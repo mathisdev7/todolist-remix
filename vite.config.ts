@@ -13,9 +13,7 @@ export default defineConfig({
     }),
     tsconfigPaths(),
   ],
-  build: {
-    rollupOptions: {
-      external: ["@remix-run/css-bundle"],
-    },
+  css: {
+    postcss: "./postcss.config.mjs",
   },
 });

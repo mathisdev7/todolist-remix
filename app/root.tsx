@@ -12,7 +12,6 @@ import {
 import clsx from "clsx";
 
 import { themeSessionResolver } from "@/components/ui/session.server";
-import { cssBundleHref } from "@remix-run/css-bundle";
 import { Home, LogIn, LogOut, Moon, PlusCircle, Sun } from "lucide-react";
 import {
   PreventFlashOnWrongTheme,
@@ -23,6 +22,7 @@ import {
 import getSession from "./auth/utils/getSession";
 import { Button } from "./components/ui/button";
 import { FloatingDock } from "./components/ui/floating-dock";
+import "./styles/tailwind.css";
 
 type LoaderData = {
   theme: Theme;
@@ -30,13 +30,12 @@ type LoaderData = {
 };
 
 export const links: LinksFunction = () => [
-  { rel: "stylesheet", href: "/app/tailwind.css" },
   {
     rel: "icon",
     href: "/favicon.ico",
     type: "image/x-icon",
   },
-  ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
+  { rel: "stylesheet", href: "/app/styles/tailwind.css" },
 ];
 
 export const loader: LoaderFunction = async ({
