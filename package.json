@@ -3,13 +3,14 @@
   "private": true,
   "sideEffects": false,
   "type": "module",
-  "scripts": {
-    "build": "remix vite:build",
-    "dev": "remix vite:dev",
-    "lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
-    "start": "remix-serve ./build/server/index.js",
-    "typecheck": "tsc"
-  },
+"scripts": {
+  "build": "remix build",
+  "dev": "remix vite:dev",
+  "lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
+  "start": "remix-serve ./build/server/index.js",
+  "vercel-build": "remix build",
+  "typecheck": "tsc"
+},
   "dependencies": {
     "@prisma/client": "^5.19.1",
     "@radix-ui/react-context-menu": "^2.2.1",
