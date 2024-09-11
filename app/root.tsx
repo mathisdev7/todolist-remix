@@ -30,7 +30,7 @@ type LoaderData = {
 };
 
 export const links: LinksFunction = () => [
-  { rel: "stylesheet", href: "app/tailwind.css" },
+  { rel: "stylesheet", href: "/app/tailwind.css" },
   {
     rel: "icon",
     href: "/favicon.ico",
@@ -87,7 +87,7 @@ function App() {
       icon: (
         <PlusCircle className="h-full w-full text-neutral-500 dark:text-neutral-300" />
       ),
-      href: "/new-todo",
+      href: "/todos/new",
     });
   }
   return (

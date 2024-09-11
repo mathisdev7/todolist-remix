@@ -13,6 +13,12 @@ export const createTodoAction: ActionFunction = async ({ request }) => {
   if (!description) {
     return json({ error: "Description is required" }, { status: 400 });
   }
+  if (title.length > 20) {
+    return json({ error: "Title is too long" }, { status: 400 });
+  }
+  if (description.length > 100) {
+    return json({ error: "Description is too long" }, { status: 400 });
+  }
   if (!userId) {
     return json({ error: "User ID is required" }, { status: 400 });
   }

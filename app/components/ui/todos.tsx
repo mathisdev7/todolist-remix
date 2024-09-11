@@ -35,8 +35,8 @@ export default function Todos({
             <p className="text-lg text-gray-200">{todo.description}</p>
           </section>
           <section className="w-full flex justify-center items-center">
-            <Form method="post" action="/toggle-todo">
-              <input type="hidden" name="todoId" value={todo.id} />
+            <Form method="post" action="/todos/toggle">
+              <input type="hidden" name="todoId" value={todo.id} readOnly />
               <Button
                 variant="default"
                 size="sm"
@@ -47,8 +47,8 @@ export default function Todos({
             </Form>
           </section>
           <section className="w-full flex justify-evenly items-center gap-4">
-            <Form method="post" action="/delete-todo">
-              <input type="hidden" name="todoId" value={todo.id} />
+            <Form method="post" action="/todos/delete">
+              <input type="hidden" name="todoId" value={todo.id} readOnly />
               <Button
                 variant="outline"
                 size="sm"
@@ -62,6 +62,9 @@ export default function Todos({
               variant="outline"
               size="sm"
               className="border-none bg-transparent hover:bg-transparent text-white hover:text-purple-400 active:scale-95"
+              onClick={() => {
+                window.location.href = "/todos/edit/" + todo.id;
+              }}
             >
               <Edit className="h-full w-full" />
             </Button>
