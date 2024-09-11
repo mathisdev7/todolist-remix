@@ -35,6 +35,9 @@ dependencies:
   '@tabler/icons-react':
     specifier: ^3.16.0
     version: 3.16.0(react@18.3.1)
+  '@vercel/edge':
+    specifier: ^1.1.2
+    version: 1.1.2
   aos:
     specifier: ^2.3.4
     version: 2.3.4
@@ -2374,6 +2377,10 @@ packages:
   /@vanilla-extract/private@1.0.6:
     resolution: {integrity: sha512-ytsG/JLweEjw7DBuZ/0JCN4WAQgM9erfSTdS1NQY778hFQSZ6cfCDEZZ0sgVm4k54uNz6ImKB33AYvSR//fjxw==}
     dev: true
+
+  /@vercel/edge@1.1.2:
+    resolution: {integrity: sha512-wt5SnhsMahWX8U9ZZhFUQoiXhMn/CUxA5xeMdZX1cwyOL1ZbDR3rNI8HRT9RSU73nDxeF6jlnqJyp/0Jy0VM2A==}
+    dev: false
 
   /@web3-storage/multipart-parser@1.0.0:
     resolution: {integrity: sha512-BEO6al7BYqcnfX15W2cnGR+Q566ACXAT9UQykORCWW80lmkpWsnEob6zJS1ZVBKsSJC8+7vJkHwlp+lXG1UCdw==}
