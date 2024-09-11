@@ -2,7 +2,7 @@
   "name": "todo-list-remix",
   "private": true,
   "sideEffects": false,
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
     "build": "remix vite:build",
     "dev": "remix vite:dev",
