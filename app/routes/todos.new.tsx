@@ -50,7 +50,7 @@ export default function NewTodo() {
     <div className="flex min-h-full flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-8 gap-6 relative top-8">
       <Form
         method="post"
-        action="/new-todo"
+        action="/todos/new"
         className="w-full max-w-sm bg-white shadow-xl rounded-lg p-6 flex flex-col gap-6"
       >
         {actionData?.error && (
@@ -69,7 +69,12 @@ export default function NewTodo() {
             placeholder="Title"
             className="w-full bg-gray-100 p-3 rounded-md border border-gray-300 focus:border-[#581d93] transition-all text-black"
           />
-          <input type="hidden" name="userId" value={loaderData.userId} />
+          <input
+            type="hidden"
+            name="userId"
+            value={loaderData.userId}
+            readOnly
+          />
           <Input
             type="text"
             name="description"
