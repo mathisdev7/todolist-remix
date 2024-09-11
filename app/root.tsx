@@ -19,10 +19,10 @@ import {
   ThemeProvider,
   useTheme,
 } from "remix-themes";
+import "../public/styles/tailwind.css";
 import getSession from "./auth/utils/getSession";
 import { Button } from "./components/ui/button";
 import { FloatingDock } from "./components/ui/floating-dock";
-import "./styles/tailwind.css";
 
 type LoaderData = {
   theme: Theme;
@@ -35,7 +35,7 @@ export const links: LinksFunction = () => [
     href: "/favicon.ico",
     type: "image/x-icon",
   },
-  { rel: "stylesheet", href: "/app/styles/tailwind.css" },
+  { rel: "stylesheet", href: "/styles/tailwind.css" },
 ];
 
 export const loader: LoaderFunction = async ({
